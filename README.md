@@ -1,15 +1,14 @@
-# homebridge-mi-gateway-fm
-[![npm version](https://badge.fury.io/js/homebridge-mi-gateway-fm.svg)](https://badge.fury.io/js/homebridge-mi-gateway-fm)
+# homebridge-mi-gateway-play-tone
 
-XiaoMi Gateway FM plugin for HomeBridge.   
-   
-Thanks for [nfarina](https://github.com/nfarina)(the author of [homebridge](https://github.com/nfarina/homebridge)), [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol), [aholstenson](https://github.com/aholstenson)(the author of [miio](https://github.com/aholstenson/miio)), all other developer and testers.   
-   
-**Note: If you find bugs, please submit them to [issues](https://github.com/YinHangCode/homebridge-mi-gateway-fm/issues) or [QQ Group: 107927710](//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d).**   
 
+XiaoMi Gateway Play Tone plugin for HomeBridge.   
+   
+Thanks for [Mr.Yin](https://github.com/YinHangCode/homebridge-mi-aqara/), [nfarina](https://github.com/nfarina)(the author of [homebridge](https://github.com/nfarina/homebridge)), [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol), [aholstenson](https://github.com/aholstenson)(the author of [miio](https://github.com/aholstenson/miio)), all other developer and testers.   
+   
 ![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-gateway-fm/master/images/Gateway.jpg)
 ![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-gateway-fm/master/images/mi-acpartner.jpg)
 ![](https://raw.githubusercontent.com/YinHangCode/homebridge-mi-gateway-fm/master/images/aqara-acpartner.jpg)
+
 
 ## Installation
 1. Install HomeBridge, please follow it's [README](https://github.com/nfarina/homebridge/blob/master/README.md).   
@@ -17,66 +16,32 @@ If you are using Raspberry Pi, please read [Running-HomeBridge-on-a-Raspberry-Pi
 2. Make sure you can see HomeBridge in your iOS devices, if not, please go back to step 1.   
 3. Install packages.   
 ```
-npm install -g miio homebridge-mi-gateway-fm
+npm install -g homebridge-mi-gateway-play-tone
 ```
 
 ## Configuration
 ```
 "accessories": [{
-    "accessory": "MiGatewayFM",
-    "name": "MiGatewayFM",
-    "ip": "192.168.88.xx",
-    "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    
+      "accessory": "MiGatewayPlayTone",
+      "name": "MiGatewayPlayTone",
+      "sid": "MAC",
+      "password": "PASSWORD",
+      "volume":2,
+      "toneId": 10005
 }]
 ```
-If you want play your own channel, you can set the following in the config.   
-```
-"accessories": [{
-    "accessory": "MiGatewayFM",
-    "name": "MiGatewayFM",
-    "ip": "192.168.88.xx",
-    "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "url": "http://live.xmcdn.com/live/1005/64.m3u8"
-}]
-```
-## Get token
-Open command prompt or terminal. Run following command:   
-```
-miio --discover
-```
-Wait until you get output similar to this:   
-```
-Device ID: xxxxxxxx   
-Model info: Unknown   
-Address: 192.168.88.xx   
-Token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx via auto-token   
-Support: Unknown   
-```
-"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" is token.   
-If token is "???", then reset device and connect device created Wi-Fi hotspot.   
-Run following command:   
-```
-miio --discover --sync
-```
-Wait until you get output.   
-For more information about token, please refer to [OpenMiHome](https://github.com/OpenMiHome/mihome-binary-protocol) and [miio](https://github.com/aholstenson/miio).   
+
+## Configuration
+1. Open Aqara gateway's settings, enable [local network protocol](https://github.com/louisZL/lumi-gateway-local-api).  
+Please follow the steps in this thread: http://bbs.xiaomi.cn/t-13198850. It's in Chinese so you might need a translator to read it.  
+2. To control the devices, put gateway's MAC address (**lower case without colon**) and password (**keep original and case sensitive**) to ~/.homebridge/config.json.   
+3. Volume can be specified by 'volume' parameter, and 'toneId' is identifier of the internal or user-uploaded melody. 
+  'toneId' can be:
+     8,1013,20,21,22,23,24,25,26,27,28,29  -  for gateway's default melodies 
+     10000 - stops any playing melodies
+     10001 and above - user-uploaded melodies
+
 ## Version Logs
-### 0.2.3
-1.optimized code.   
-### 0.2.2
-1.optimized code.   
-### 0.2.1
-1.optimized code.   
-### 0.2.0
-1.fixed bug that homebridge not works when device is not responding.   
-2.add support for aqara ac partner FM.   
-### 0.1.1
-1.optimized code.   
-### 0.1.0
-1.add support for mi ac partner FM.   
-### 0.0.3
-1.optimized code.   
-### 0.0.2
-1.optimized code.   
 ### 0.0.1
-1.Switch on/off XiaoMi Gateway FM.   
+1. Initial release   

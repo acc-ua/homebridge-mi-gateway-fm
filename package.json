@@ -1,18 +1,18 @@
 {
-  "name": "homebridge-mi-gateway-fm",
-  "version": "0.2.3",
-  "description": "XiaoMi Gateway FM plugin for HomeBridge(https://github.com/nfarina/homebridge).",
+  "name": "homebridge-mi-gateway-play-tone",
+  "version": "0.0.1",
+  "description": "XiaoMi Gateway Play Tone plugin for HomeBridge(https://github.com/nfarina/homebridge).",
   "keywords": [
     "homebridge-plugin"
   ],
-  "author": "YinHang",
+  "author": "acc-ua",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YinHangCode/homebridge-mi-gateway-fm"
+    "url": "https://github.com/acc-ua/homebridge-mi-gateway-tone"
   },
   "bugs": {
-    "url": "https://github.com/YinHangCode/homebridge-mi-gateway-fm/issues"
+    "url": "https://github.com/acc-ua/homebridge-mi-gateway-tone/issues"
   },
   "engines": {
     "node": ">=0.12.0",

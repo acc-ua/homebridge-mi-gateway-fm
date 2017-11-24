@@ -68,22 +68,10 @@ function MiGatewayPlayTone(log, config) {
     this.log = log;
     this.config = config;
     this.port = config.port || 9898;
-   // this.writeOnly = options.writeOnly || false;
     this.initServerSocket();
     this._gatewayInternalToken = '';
     this._gatewayInternalIP = this.config.ip;
-    
-    var that = this;
-   // this.device = new miio.Device({
-     //   address: that.config.ip,
-       // token: that.config.token
-   // });
 
-   ////"token": "e2d02d9b977da675bb131e3c2bfe2ab3",
-
-
-
-    //this.debug = require('debug')('homebridge-mi-gateway-play-tonePlayTone');
 }
 
 MiGatewayPlayTone.prototype = {
@@ -91,11 +79,9 @@ MiGatewayPlayTone.prototype = {
         callback();
     },
 
-
     initServerSocket:function() {
     var that = this;
     
-    // err - Error object, https://nodejs.org/api/errors.html
     serverSocket.on('error', function(err){
         that.log.error('error, msg - %s, stack - %s\n', err.message, err.stack);
     });
@@ -163,22 +149,19 @@ MiGatewayPlayTone.prototype = {
             if(data['ip'])
             {
                  this._gatewayInternalIP = data['ip'];
-                 that.log.warn("FOUND IP of gatrway" + data['ip']);
+                 that.log.warn("FOUND IP of gateway" + data['ip']);
              }
         } catch (ex) {
             that.log.error("Bad msg %s", msg);
             return;
         }
-
-       
-
-
     }
     else {
         //that.log.warn("[Revc]" + msg);
     }
-}
-,
+},
+
+
 sendWriteCommand:function(command, options) {
     var that = this;
     return new Promise((resolve, reject) => {
@@ -197,14 +180,12 @@ sendWriteCommand:function(command, options) {
         that.sendCommand(this._gatewayInternalIP, this.port, msgTag, command, options).then(result => {
             resolve(result);
         }).catch(function(err) {
-            // that.log.error(err);
             reject(err);
         });
     })
-}
-,
-sendCommand : function(ip, port, msgTag, msg, options)  {
-    
+},
+ 
+  sendCommand : function(ip, port, msgTag, msg, options)  {
     var that = this;
     return new Promise((resolve, reject) => {
         if(!that.PromisesSendCommand) {
@@ -265,12 +246,9 @@ sendCommand : function(ip, port, msgTag, msg, options)  {
             send();
         }
     })
-}
-
-
-,
-
-    getServices: function() {
+},
+  
+  getServices: function() {
         var services = [];
         var index = 1;
         var infoService = new Service.AccessoryInformation();
@@ -311,7 +289,6 @@ sendCommand : function(ip, port, msgTag, msg, options)  {
                                that.btnService.setCharacteristic(Characteristic.On, 0);
                                clearTimeout(that.autoOffTimeout);
                     }, 1000);
-                    //callback(null);
                     
                 }).catch(function(err) {
                     that.log.error("[MiGatewayFM][ERROR]setGStatus Error: " + err);
